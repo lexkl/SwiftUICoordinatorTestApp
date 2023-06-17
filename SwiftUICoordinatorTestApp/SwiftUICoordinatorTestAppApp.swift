@@ -11,7 +11,7 @@ import SwiftUI
 struct SwiftUICoordinatorTestAppApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            TabCoordinatorView(coordinator: TabCoordinator())
         }
     }
 }
