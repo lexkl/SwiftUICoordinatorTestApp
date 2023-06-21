@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		39B2BA7C636CBD85238180B8 /* Pods_SwiftUICoordinatorTestApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 31B04E783A538DDD4D61523D /* Pods_SwiftUICoordinatorTestApp.framework */; };
 		77550A1B2A3D0D5A00D65EC1 /* SwiftUICoordinatorTestAppApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77550A1A2A3D0D5A00D65EC1 /* SwiftUICoordinatorTestAppApp.swift */; };
 		77550A1F2A3D0D5B00D65EC1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 77550A1E2A3D0D5B00D65EC1 /* Assets.xcassets */; };
 		77550A222A3D0D5B00D65EC1 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 77550A212A3D0D5B00D65EC1 /* Preview Assets.xcassets */; };
@@ -18,9 +19,17 @@
 		77550A3A2A3E0D5C00D65EC1 /* VideoListCoordinatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77550A392A3E0D5C00D65EC1 /* VideoListCoordinatorView.swift */; };
 		77550A3E2A3E0F2500D65EC1 /* Private.plist in Resources */ = {isa = PBXBuildFile; fileRef = 77550A3D2A3E0F2500D65EC1 /* Private.plist */; };
 		77550A402A3E3F8F00D65EC1 /* URL.plist in Resources */ = {isa = PBXBuildFile; fileRef = 77550A3F2A3E3F8F00D65EC1 /* URL.plist */; };
+		77A5828E2A3E64A9004064CA /* ImageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77A5828D2A3E64A9004064CA /* ImageService.swift */; };
+		77A582912A3F3C0B004064CA /* ImageListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77A582902A3F3C0B004064CA /* ImageListView.swift */; };
+		77A582932A3F3C4F004064CA /* ImageListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77A582922A3F3C4F004064CA /* ImageListViewModel.swift */; };
+		77A582962A40869C004064CA /* ImageListProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77A582952A40869C004064CA /* ImageListProvider.swift */; };
+		77A582982A40A2B3004064CA /* NetworkAgent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77A582972A40A2B3004064CA /* NetworkAgent.swift */; };
+		77A5829B2A424C21004064CA /* Swinject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77A5829A2A424C21004064CA /* Swinject.swift */; };
+		77A5829E2A43399E004064CA /* PlistLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77A5829D2A43399E004064CA /* PlistLoader.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		31B04E783A538DDD4D61523D /* Pods_SwiftUICoordinatorTestApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SwiftUICoordinatorTestApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		77550A172A3D0D5A00D65EC1 /* SwiftUICoordinatorTestApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SwiftUICoordinatorTestApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		77550A1A2A3D0D5A00D65EC1 /* SwiftUICoordinatorTestAppApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftUICoordinatorTestAppApp.swift; sourceTree = "<group>"; };
 		77550A1E2A3D0D5B00D65EC1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -33,6 +42,15 @@
 		77550A392A3E0D5C00D65EC1 /* VideoListCoordinatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoListCoordinatorView.swift; sourceTree = "<group>"; };
 		77550A3D2A3E0F2500D65EC1 /* Private.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Private.plist; sourceTree = "<group>"; };
 		77550A3F2A3E3F8F00D65EC1 /* URL.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = URL.plist; sourceTree = "<group>"; };
+		77A5828D2A3E64A9004064CA /* ImageService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageService.swift; sourceTree = "<group>"; };
+		77A582902A3F3C0B004064CA /* ImageListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageListView.swift; sourceTree = "<group>"; };
+		77A582922A3F3C4F004064CA /* ImageListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageListViewModel.swift; sourceTree = "<group>"; };
+		77A582952A40869C004064CA /* ImageListProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageListProvider.swift; sourceTree = "<group>"; };
+		77A582972A40A2B3004064CA /* NetworkAgent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkAgent.swift; sourceTree = "<group>"; };
+		77A5829A2A424C21004064CA /* Swinject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Swinject.swift; sourceTree = "<group>"; };
+		77A5829D2A43399E004064CA /* PlistLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlistLoader.swift; sourceTree = "<group>"; };
+		895A1F0A367FD331E14247EE /* Pods-SwiftUICoordinatorTestApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SwiftUICoordinatorTestApp.release.xcconfig"; path = "Target Support Files/Pods-SwiftUICoordinatorTestApp/Pods-SwiftUICoordinatorTestApp.release.xcconfig"; sourceTree = "<group>"; };
+		CB99BC6FA21365773D537C6C /* Pods-SwiftUICoordinatorTestApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SwiftUICoordinatorTestApp.debug.xcconfig"; path = "Target Support Files/Pods-SwiftUICoordinatorTestApp/Pods-SwiftUICoordinatorTestApp.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -40,17 +58,37 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				39B2BA7C636CBD85238180B8 /* Pods_SwiftUICoordinatorTestApp.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		08F853B9587C02CD33B34147 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				CB99BC6FA21365773D537C6C /* Pods-SwiftUICoordinatorTestApp.debug.xcconfig */,
+				895A1F0A367FD331E14247EE /* Pods-SwiftUICoordinatorTestApp.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
+		53D9778E50781CDA382CB540 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				31B04E783A538DDD4D61523D /* Pods_SwiftUICoordinatorTestApp.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		77550A0E2A3D0D5A00D65EC1 = {
 			isa = PBXGroup;
 			children = (
 				77550A192A3D0D5A00D65EC1 /* SwiftUICoordinatorTestApp */,
 				77550A182A3D0D5A00D65EC1 /* Products */,
+				08F853B9587C02CD33B34147 /* Pods */,
+				53D9778E50781CDA382CB540 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -65,6 +103,8 @@
 		77550A192A3D0D5A00D65EC1 /* SwiftUICoordinatorTestApp */ = {
 			isa = PBXGroup;
 			children = (
+				77A5829C2A433994004064CA /* Utils */,
+				77A582992A424C17004064CA /* Extensions */,
 				77550A3C2A3E0F0200D65EC1 /* Network */,
 				77550A3B2A3E0EF400D65EC1 /* Modules */,
 				77550A1A2A3D0D5A00D65EC1 /* SwiftUICoordinatorTestAppApp.swift */,
@@ -94,6 +134,7 @@
 		77550A2F2A3E08F100D65EC1 /* ImagesTab */ = {
 			isa = PBXGroup;
 			children = (
+				77A5828F2A3F3BF8004064CA /* ImageListView */,
 				77550A302A3E092900D65EC1 /* ImageListCoordinator */,
 			);
 			path = ImagesTab;
@@ -140,8 +181,52 @@
 			children = (
 				77550A3D2A3E0F2500D65EC1 /* Private.plist */,
 				77550A3F2A3E3F8F00D65EC1 /* URL.plist */,
+				77A582972A40A2B3004064CA /* NetworkAgent.swift */,
 			);
 			path = Network;
+			sourceTree = "<group>";
+		};
+		77A5828C2A3E6498004064CA /* ImageService */ = {
+			isa = PBXGroup;
+			children = (
+				77A5828D2A3E64A9004064CA /* ImageService.swift */,
+			);
+			path = ImageService;
+			sourceTree = "<group>";
+		};
+		77A5828F2A3F3BF8004064CA /* ImageListView */ = {
+			isa = PBXGroup;
+			children = (
+				77A582942A408690004064CA /* ImageListProvider */,
+				77A5828C2A3E6498004064CA /* ImageService */,
+				77A582902A3F3C0B004064CA /* ImageListView.swift */,
+				77A582922A3F3C4F004064CA /* ImageListViewModel.swift */,
+			);
+			path = ImageListView;
+			sourceTree = "<group>";
+		};
+		77A582942A408690004064CA /* ImageListProvider */ = {
+			isa = PBXGroup;
+			children = (
+				77A582952A40869C004064CA /* ImageListProvider.swift */,
+			);
+			path = ImageListProvider;
+			sourceTree = "<group>";
+		};
+		77A582992A424C17004064CA /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				77A5829A2A424C21004064CA /* Swinject.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		77A5829C2A433994004064CA /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				77A5829D2A43399E004064CA /* PlistLoader.swift */,
+			);
+			path = Utils;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -151,9 +236,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 77550A252A3D0D5B00D65EC1 /* Build configuration list for PBXNativeTarget "SwiftUICoordinatorTestApp" */;
 			buildPhases = (
+				53666E76BB137C69D2718EB5 /* [CP] Check Pods Manifest.lock */,
 				77550A132A3D0D5A00D65EC1 /* Sources */,
 				77550A142A3D0D5A00D65EC1 /* Frameworks */,
 				77550A152A3D0D5A00D65EC1 /* Resources */,
+				F44EE6D54443F003D1802484 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -211,18 +298,67 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		53666E76BB137C69D2718EB5 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-SwiftUICoordinatorTestApp-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		F44EE6D54443F003D1802484 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-SwiftUICoordinatorTestApp/Pods-SwiftUICoordinatorTestApp-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-SwiftUICoordinatorTestApp/Pods-SwiftUICoordinatorTestApp-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-SwiftUICoordinatorTestApp/Pods-SwiftUICoordinatorTestApp-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		77550A132A3D0D5A00D65EC1 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				77550A382A3E0D5000D65EC1 /* VideoListCoordinator.swift in Sources */,
+				77A5829B2A424C21004064CA /* Swinject.swift in Sources */,
+				77A582962A40869C004064CA /* ImageListProvider.swift in Sources */,
+				77A5828E2A3E64A9004064CA /* ImageService.swift in Sources */,
 				77550A342A3E098800D65EC1 /* ImageListCoordinator.swift in Sources */,
 				77550A2C2A3DFE1000D65EC1 /* TabCoordinatorView.swift in Sources */,
+				77A582912A3F3C0B004064CA /* ImageListView.swift in Sources */,
+				77A582932A3F3C4F004064CA /* ImageListViewModel.swift in Sources */,
 				77550A2A2A3DFE0000D65EC1 /* TabCoordinator.swift in Sources */,
 				77550A1B2A3D0D5A00D65EC1 /* SwiftUICoordinatorTestAppApp.swift in Sources */,
 				77550A3A2A3E0D5C00D65EC1 /* VideoListCoordinatorView.swift in Sources */,
 				77550A322A3E096100D65EC1 /* ImageListCoordinatorView.swift in Sources */,
+				77A582982A40A2B3004064CA /* NetworkAgent.swift in Sources */,
+				77A5829E2A43399E004064CA /* PlistLoader.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -345,6 +481,7 @@
 		};
 		77550A262A3D0D5B00D65EC1 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = CB99BC6FA21365773D537C6C /* Pods-SwiftUICoordinatorTestApp.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -374,6 +511,7 @@
 		};
 		77550A272A3D0D5B00D65EC1 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 895A1F0A367FD331E14247EE /* Pods-SwiftUICoordinatorTestApp.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;

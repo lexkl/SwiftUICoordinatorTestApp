@@ -6,7 +6,15 @@
 //
 
 import Foundation
+import Swinject
 
-final class ImageListCoordinator: ObservableObject {
-    
+final class ImageListCoordinator: ObservableObject, Coordinator {
+    func imageListView() -> ImageListView {
+        let service = Container.shared.resolve(ImageService.self)!
+        let provider = ImageListProvider(service: service)
+        let viewModel = ImageListViewModel(provider: provider)
+        let view = ImageListView(viewModel: viewModel)
+        
+        return view
+    }
 }

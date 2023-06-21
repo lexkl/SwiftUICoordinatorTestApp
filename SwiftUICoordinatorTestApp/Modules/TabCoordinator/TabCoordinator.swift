@@ -13,8 +13,11 @@ enum TabItem {
     case videos
 }
 
-final class TabCoordinator: ObservableObject {
-    @Published var tab = TabItem.images
+protocol Coordinator {
+    
+}
+
+final class TabCoordinator: ObservableObject, Coordinator {
     
     func imagesTab() -> ImageListCoordinatorView {
         let coordinator = ImageListCoordinator()

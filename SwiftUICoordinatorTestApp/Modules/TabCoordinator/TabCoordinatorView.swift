@@ -8,10 +8,11 @@
 import SwiftUI
 
 struct TabCoordinatorView: View {
+    @State private var selectedTab = TabItem.images
     @ObservedObject var coordinator: TabCoordinator
     
     var body: some View {
-        TabView(selection: $coordinator.tab) {
+        TabView(selection: $selectedTab) {
             coordinator.imagesTab()
                 .tabItem { Label("Images", systemImage: "photo") }
                 .tag(TabItem.images)

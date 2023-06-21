@@ -9,9 +9,10 @@ import SwiftUI
 
 @main
 struct SwiftUICoordinatorTestAppApp: App {
+    @StateObject var coordinator = TabCoordinator()
     var body: some Scene {
         WindowGroup {
-            TabCoordinatorView(coordinator: TabCoordinator())
+            TabCoordinatorView(coordinator: coordinator)
         }
     }
 }

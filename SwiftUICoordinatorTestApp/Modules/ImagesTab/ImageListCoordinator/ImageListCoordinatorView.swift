@@ -11,7 +11,10 @@ struct ImageListCoordinatorView: View {
     @ObservedObject var coordinator: ImageListCoordinator
     
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        NavigationView {
+            coordinator.imageListView()
+                .navigationTitle("Images")
+        }
     }
 }
 
