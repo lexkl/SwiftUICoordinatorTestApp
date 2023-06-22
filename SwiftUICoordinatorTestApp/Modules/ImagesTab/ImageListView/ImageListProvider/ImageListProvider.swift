@@ -16,12 +16,19 @@ struct ImageListProvider {
         self.service = service
     }
     
-    func load() -> Observable<[ImageListPresentable]> {
-        service.load()
+    func load(page: Int) -> Observable<[ImageListPresentable]> {
+        service.load(page: page)
             .flatMap { apiImages -> Observable<[ImageListPresentable]> in
                 let observables = apiImages.map { apiImage in
                     service.download(imageUrl: apiImage.webformatURL)
-                        .map { ImageListPresentable(id: apiImage.id, image: $0) }
+                        .map { ImageListPresentable(id: apiImage.id,
+                                                    image: $0,
+                                                    userName: apiImage.user,
+                                                    tags: apiImage.tags,
+                                                    likes: apiImage.likes,
+                                                    comments: apiImage.comments,
+                                                    views: apiImage.views,
+                                                    downloads: apiImage.downloads) }
                 }
                 
                 return Observable.zip(observables)

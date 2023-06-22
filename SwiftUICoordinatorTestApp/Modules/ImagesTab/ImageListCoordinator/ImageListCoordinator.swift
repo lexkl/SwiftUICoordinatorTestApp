@@ -7,14 +7,15 @@
 
 import Foundation
 import Swinject
+import SwiftUI
 
 final class ImageListCoordinator: ObservableObject, Coordinator {
-    func imageListView() -> ImageListView {
+    func imageListView() -> AnyView {
         let service = Container.shared.resolve(ImageService.self)!
         let provider = ImageListProvider(service: service)
-        let viewModel = ImageListViewModel(provider: provider)
+        let viewModel = ImageListViewModelImpl(provider: provider)
         let view = ImageListView(viewModel: viewModel)
         
-        return view
+        return view.toAnyView()
     }
 }

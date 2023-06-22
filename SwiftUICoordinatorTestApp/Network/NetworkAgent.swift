@@ -30,7 +30,7 @@ final class NetworkAgent {
     
     func requestJSON<T: Decodable>(urlKey: PixabayURL,
                                    method: HTTPMethod = .get,
-                                   parameters: [String: String] = [:]) -> Observable<T> {
+                                   parameters: [String: Any] = [:]) -> Observable<T> {
         var urlsPlist: [String: String]
         var privatePlist: [String: String]
         
@@ -46,7 +46,7 @@ final class NetworkAgent {
             return Observable.error(PlistError.invalidPlistContent)
         }
         
-        let allParameters: [String: String] = ["key": apiKey].merging(parameters) { _, new in
+        let allParameters: [String: Any] = ["key": apiKey].merging(parameters) { _, new in
             new
         }
         
