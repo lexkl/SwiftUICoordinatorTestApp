@@ -16,8 +16,8 @@ struct ImageListProvider {
         self.service = service
     }
     
-    func load(page: Int) -> Observable<[ImageListPresentable]> {
-        service.load(page: page)
+    func load(page: Int, searchText: String) -> Observable<[ImageListPresentable]> {
+        service.load(page: page, searchText: searchText)
             .flatMap { apiImages -> Observable<[ImageListPresentable]> in
                 let observables = apiImages.map { apiImage in
                     service.download(imageUrl: apiImage.webformatURL)

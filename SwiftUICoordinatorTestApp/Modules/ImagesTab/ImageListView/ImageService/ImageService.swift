@@ -56,9 +56,14 @@ final class ImageService {
         self.scheduler = ConcurrentDispatchQueueScheduler(queue: concurrentQueue)
     }
     
-    func load(page: Int) -> Observable<[ApiImage]> {
+    func load(page: Int, searchText: String) -> Observable<[ApiImage]> {
+        let parameters = [
+            "q": searchText,
+            "page": page
+        ] as [String : Any]
+        
         let apiImagesObservable: Observable<ApiImageResponse> = networker
-            .requestJSON(urlKey: .images, parameters: ["page": page])
+            .requestJSON(urlKey: .images, parameters: parameters)
             .subscribe(on: scheduler)
         return apiImagesObservable.map { $0.hits }
     }

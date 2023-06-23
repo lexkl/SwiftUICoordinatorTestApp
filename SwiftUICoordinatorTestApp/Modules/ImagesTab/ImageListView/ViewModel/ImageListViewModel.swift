@@ -38,17 +38,28 @@ final class ImageListViewModelImpl: ImageListViewModel {
     @Published var viewState = ImageListViewState.loading
     
     private let provider: ImageListProvider
+    private var searchTextObservable: Observable<String>
     private let disposeBag = DisposeBag()
     
     private var currentPage = 1
+    private var searchText = ""
     
-    init(provider: ImageListProvider) {
+    init(provider: ImageListProvider, searchTextObservable: Observable<String>) {
         self.provider = provider
+        self.searchTextObservable = searchTextObservable
+        
+        self.searchTextObservable
+            .subscribe { [weak self] text in
+                guard let self else { return }
+                searchText = text
+                load(page: 1)
+            }
+            .disposed(by: disposeBag)
     }
     
     func load(page: Int) {
         currentPage = page
-        provider.load(page: currentPage)
+        provider.load(page: currentPage, searchText: searchText)
             .subscribe(onNext: { [weak self] values in
                 guard let self else { return }
                 presentables.count == 0
