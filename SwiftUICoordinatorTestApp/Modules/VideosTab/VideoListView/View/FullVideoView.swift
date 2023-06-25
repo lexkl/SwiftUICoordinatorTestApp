@@ -1,30 +1,41 @@
 //
-//  FullImageView.swift
+//  FullVideoView.swift
 //  SwiftUICoordinatorTestApp
 //
-//  Created by Aleksey Klyonov on 21.06.2023.
+//  Created by Aleksey Klyonov on 24.06.2023.
 //
 
 import SwiftUI
+import AVFoundation
+import _AVKit_SwiftUI
 
-struct FullImageView: View {
-    let image: UIImage
-    let userName: String
-    let tags: String
-    let likes: Int
-    let comments: Int
-    let views: Int
-    let downloads: Int
+struct FullVideoView: View {
+    private let userName: String
+    private let tags: String
+    private let likes: Int
+    private let comments: Int
+    private let views: Int
+    private let downloads: Int
+    
+    private let player: AVPlayer
     
     @State private var tabBarVisibility: Visibility = .hidden
+    
+    init(videoUrl: URL, userName: String, tags: String, likes: Int, comments: Int, views: Int, downloads: Int) {
+        self.userName = userName
+        self.tags = tags
+        self.likes = likes
+        self.comments = comments
+        self.views = views
+        self.downloads = downloads
+        self.player = AVPlayer(url: videoUrl)
+    }
     
     var body: some View {
         VStack(spacing: 0) {
             topPanel
             Spacer()
-            Image(uiImage: image)
-                .resizable()
-                .scaledToFit()
+            VideoPlayer(player: player)
             Spacer()
             bottomPanel
         }
@@ -32,6 +43,9 @@ struct FullImageView: View {
         .navigationBarTitleDisplayMode(.inline)
         .navigationTitle(userName)
         .toolbar(tabBarVisibility, for: .tabBar)
+        .onAppear {
+            player.play()
+        }
         .onDisappear {
             tabBarVisibility = .visible
         }
@@ -82,17 +96,5 @@ struct FullImageView: View {
         }
         .opacity(0.8)
         .padding(.horizontal, 10)
-    }
-}
-
-struct FullImageView_Previews: PreviewProvider {
-    static var previews: some View {
-        FullImageView(image: UIImage(systemName: "photo")!,
-                      userName: "user",
-                      tags: "blossom, bloom, flower",
-                      likes: 0,
-                      comments: 0,
-                      views: 0,
-                      downloads: 0)
     }
 }

@@ -1,22 +1,18 @@
 //
-//  ImageListViewModel\.swift
+//  VideoListViewModel.swift
 //  SwiftUICoordinatorTestApp
 //
-//  Created by Aleksey Klyonov on 18.06.2023.
+//  Created by Aleksey Klyonov on 23.06.2023.
 //
 
 import Foundation
 import SwiftUI
 import RxSwift
 
-enum ImageListViewState {
-    case loading
-    case loaded
-}
-
-struct ImageListPresentable {
+struct VideoListPresentable {
     let id: Int
-    let image: UIImage
+    let thumbnail: UIImage
+    let videoUrl: URL
     let userName: String
     let tags: String
     let likes: Int
@@ -25,26 +21,24 @@ struct ImageListPresentable {
     let downloads: Int
 }
 
-protocol ImageListViewModel: ObservableObject {
-    var presentables: [ImageListPresentable] { get set }
-    var viewState: ImageListViewState { get set }
+protocol VideoListViewModel: ObservableObject {
+    var presentables: [VideoListPresentable] { get set }
     
     func load(page: Int)
     func loadNextPage()
 }
 
-final class ImageListViewModelImpl: ImageListViewModel {
-    @Published var presentables = [ImageListPresentable]()
-    @Published var viewState = ImageListViewState.loading
+final class VideoListViewModelImpl: VideoListViewModel {
+    @Published var presentables = [VideoListPresentable]()
     
-    private let provider: ImageListProvider
+    private let provider: VideoListProvider
     private var searchTextObservable: Observable<String>
     private let disposeBag = DisposeBag()
     
     private var currentPage = 1
     private var searchText = ""
     
-    init(provider: ImageListProvider, searchTextObservable: Observable<String>) {
+    init(provider: VideoListProvider, searchTextObservable: Observable<String>) {
         self.provider = provider
         self.searchTextObservable = searchTextObservable
         
@@ -54,12 +48,13 @@ final class ImageListViewModelImpl: ImageListViewModel {
     func load(page: Int) {
         currentPage = page
         provider.load(page: currentPage, searchText: searchText)
-            .subscribe(onNext: { [weak self] values in
-                guard let self else { return }
-                presentables.count == 0
-                    ? presentables = values
-                    : presentables.append(contentsOf: values)
-                viewState = .loaded
+            .subscribe(onNext: { value in
+                DispatchQueue.main.async { [weak self] in
+                    guard let self else { return }
+                    presentables.count == 0
+                        ? presentables = [value]
+                        : presentables.append(value)
+                }
             })
             .disposed(by: disposeBag)
     }
@@ -69,7 +64,7 @@ final class ImageListViewModelImpl: ImageListViewModel {
     }
 }
 
-private extension ImageListViewModelImpl {
+private extension VideoListViewModelImpl {
     func bind() {
         self.searchTextObservable
             .subscribe { [weak self] text in

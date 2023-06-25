@@ -29,6 +29,13 @@
 		77A582A12A434CCC004064CA /* View.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77A582A02A434CCC004064CA /* View.swift */; };
 		77A582A52A439231004064CA /* FullImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77A582A42A439231004064CA /* FullImageView.swift */; };
 		77A582A72A4487C6004064CA /* CardImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77A582A62A4487C6004064CA /* CardImageView.swift */; };
+		77A582AE2A45EF6A004064CA /* VideoListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77A582AD2A45EF6A004064CA /* VideoListView.swift */; };
+		77A582B02A45EF8C004064CA /* VideoListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77A582AF2A45EF8C004064CA /* VideoListViewModel.swift */; };
+		77A582B22A45F06E004064CA /* VideoService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77A582B12A45F06E004064CA /* VideoService.swift */; };
+		77A582B42A45F2CB004064CA /* VideoListProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77A582B32A45F2CB004064CA /* VideoListProvider.swift */; };
+		77A582B82A45F91D004064CA /* CustomProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77A582B72A45F91D004064CA /* CustomProgressView.swift */; };
+		77A582BA2A472750004064CA /* VideoCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77A582B92A472750004064CA /* VideoCardView.swift */; };
+		77A582BC2A472806004064CA /* FullVideoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77A582BB2A472806004064CA /* FullVideoView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -55,6 +62,13 @@
 		77A582A02A434CCC004064CA /* View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = View.swift; sourceTree = "<group>"; };
 		77A582A42A439231004064CA /* FullImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FullImageView.swift; sourceTree = "<group>"; };
 		77A582A62A4487C6004064CA /* CardImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardImageView.swift; sourceTree = "<group>"; };
+		77A582AD2A45EF6A004064CA /* VideoListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoListView.swift; sourceTree = "<group>"; };
+		77A582AF2A45EF8C004064CA /* VideoListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoListViewModel.swift; sourceTree = "<group>"; };
+		77A582B12A45F06E004064CA /* VideoService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoService.swift; sourceTree = "<group>"; };
+		77A582B32A45F2CB004064CA /* VideoListProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoListProvider.swift; sourceTree = "<group>"; };
+		77A582B72A45F91D004064CA /* CustomProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomProgressView.swift; sourceTree = "<group>"; };
+		77A582B92A472750004064CA /* VideoCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoCardView.swift; sourceTree = "<group>"; };
+		77A582BB2A472806004064CA /* FullVideoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FullVideoView.swift; sourceTree = "<group>"; };
 		895A1F0A367FD331E14247EE /* Pods-SwiftUICoordinatorTestApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SwiftUICoordinatorTestApp.release.xcconfig"; path = "Target Support Files/Pods-SwiftUICoordinatorTestApp/Pods-SwiftUICoordinatorTestApp.release.xcconfig"; sourceTree = "<group>"; };
 		CB99BC6FA21365773D537C6C /* Pods-SwiftUICoordinatorTestApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SwiftUICoordinatorTestApp.debug.xcconfig"; path = "Target Support Files/Pods-SwiftUICoordinatorTestApp/Pods-SwiftUICoordinatorTestApp.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -109,6 +123,7 @@
 		77550A192A3D0D5A00D65EC1 /* SwiftUICoordinatorTestApp */ = {
 			isa = PBXGroup;
 			children = (
+				77A582B52A45F904004064CA /* UIComponents */,
 				77A5829C2A433994004064CA /* Utils */,
 				77A582992A424C17004064CA /* Extensions */,
 				77550A3C2A3E0F0200D65EC1 /* Network */,
@@ -158,6 +173,7 @@
 		77550A352A3E0D2C00D65EC1 /* VideosTab */ = {
 			isa = PBXGroup;
 			children = (
+				77A582A82A45EF2A004064CA /* VideoListView */,
 				77550A362A3E0D3800D65EC1 /* VideoListCoordinator */,
 			);
 			path = VideosTab;
@@ -260,6 +276,67 @@
 				77A582922A3F3C4F004064CA /* ImageListViewModel.swift */,
 			);
 			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		77A582A82A45EF2A004064CA /* VideoListView */ = {
+			isa = PBXGroup;
+			children = (
+				77A582AC2A45EF56004064CA /* VideoListProvider */,
+				77A582AB2A45EF4E004064CA /* VideoService */,
+				77A582AA2A45EF37004064CA /* ViewModel */,
+				77A582A92A45EF33004064CA /* View */,
+			);
+			path = VideoListView;
+			sourceTree = "<group>";
+		};
+		77A582A92A45EF33004064CA /* View */ = {
+			isa = PBXGroup;
+			children = (
+				77A582AD2A45EF6A004064CA /* VideoListView.swift */,
+				77A582B92A472750004064CA /* VideoCardView.swift */,
+				77A582BB2A472806004064CA /* FullVideoView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		77A582AA2A45EF37004064CA /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				77A582AF2A45EF8C004064CA /* VideoListViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		77A582AB2A45EF4E004064CA /* VideoService */ = {
+			isa = PBXGroup;
+			children = (
+				77A582B12A45F06E004064CA /* VideoService.swift */,
+			);
+			path = VideoService;
+			sourceTree = "<group>";
+		};
+		77A582AC2A45EF56004064CA /* VideoListProvider */ = {
+			isa = PBXGroup;
+			children = (
+				77A582B32A45F2CB004064CA /* VideoListProvider.swift */,
+			);
+			path = VideoListProvider;
+			sourceTree = "<group>";
+		};
+		77A582B52A45F904004064CA /* UIComponents */ = {
+			isa = PBXGroup;
+			children = (
+				77A582B62A45F90D004064CA /* ProgressView */,
+			);
+			path = UIComponents;
+			sourceTree = "<group>";
+		};
+		77A582B62A45F90D004064CA /* ProgressView */ = {
+			isa = PBXGroup;
+			children = (
+				77A582B72A45F91D004064CA /* CustomProgressView.swift */,
+			);
+			path = ProgressView;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -378,23 +455,30 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				77A582BA2A472750004064CA /* VideoCardView.swift in Sources */,
 				77550A382A3E0D5000D65EC1 /* VideoListCoordinator.swift in Sources */,
 				77A5829B2A424C21004064CA /* Swinject.swift in Sources */,
+				77A582BC2A472806004064CA /* FullVideoView.swift in Sources */,
 				77A582A12A434CCC004064CA /* View.swift in Sources */,
 				77A582A72A4487C6004064CA /* CardImageView.swift in Sources */,
+				77A582B42A45F2CB004064CA /* VideoListProvider.swift in Sources */,
 				77A582962A40869C004064CA /* ImageListProvider.swift in Sources */,
 				77A5828E2A3E64A9004064CA /* ImageService.swift in Sources */,
 				77550A342A3E098800D65EC1 /* ImageListCoordinator.swift in Sources */,
 				77550A2C2A3DFE1000D65EC1 /* TabCoordinatorView.swift in Sources */,
 				77A582912A3F3C0B004064CA /* ImageListView.swift in Sources */,
+				77A582B22A45F06E004064CA /* VideoService.swift in Sources */,
 				77A582932A3F3C4F004064CA /* ImageListViewModel.swift in Sources */,
 				77550A2A2A3DFE0000D65EC1 /* TabCoordinator.swift in Sources */,
 				77550A1B2A3D0D5A00D65EC1 /* SwiftUICoordinatorTestAppApp.swift in Sources */,
 				77550A3A2A3E0D5C00D65EC1 /* VideoListCoordinatorView.swift in Sources */,
 				77550A322A3E096100D65EC1 /* ImageListCoordinatorView.swift in Sources */,
+				77A582AE2A45EF6A004064CA /* VideoListView.swift in Sources */,
+				77A582B02A45EF8C004064CA /* VideoListViewModel.swift in Sources */,
 				77A582982A40A2B3004064CA /* NetworkAgent.swift in Sources */,
 				77A5829E2A43399E004064CA /* PlistLoader.swift in Sources */,
 				77A582A52A439231004064CA /* FullImageView.swift in Sources */,
+				77A582B82A45F91D004064CA /* CustomProgressView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

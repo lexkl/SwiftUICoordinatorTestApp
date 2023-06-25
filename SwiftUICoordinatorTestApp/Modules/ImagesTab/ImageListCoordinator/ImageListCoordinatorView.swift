@@ -25,10 +25,6 @@ struct ImageListCoordinatorView: View {
 }
 
 private extension ImageListCoordinatorView {
-    func searchTextDidChange(newValue: String) {
-        textDidChangeSubject.onNext(newValue)
-    }
-    
     func searchTextObservable() -> Observable<String> {
         textDidChangeSubject
             .asObservable()

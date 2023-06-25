@@ -1,13 +1,14 @@
 //
-//  ImageListView.swift
+//  VideoListView.swift
 //  SwiftUICoordinatorTestApp
 //
-//  Created by Aleksey Klyonov on 18.06.2023.
+//  Created by Aleksey Klyonov on 23.06.2023.
 //
 
 import SwiftUI
+import AVKit
 
-struct ImageListView<ViewModel>: View where ViewModel: ImageListViewModel {
+struct VideoListView<ViewModel>: View where ViewModel: VideoListViewModel {
     @ObservedObject var viewModel: ViewModel
     
     var body: some View {
@@ -21,27 +22,27 @@ struct ImageListView<ViewModel>: View where ViewModel: ImageListViewModel {
     }
     
     private var content: AnyView {
-        switch viewModel.viewState {
-        case .loading:
+        if viewModel.presentables.isEmpty {
             return CustomProgressView().toAnyView()
-        case .loaded:
-            return imageList.toAnyView()
+        } else {
+            return videoList.toAnyView()
         }
     }
     
-    private var imageList: some View {
+    private var videoList: some View {
         ScrollView(.vertical) {
             LazyVStack(spacing: 10.0) {
                 ForEach(viewModel.presentables, id: \.id) { presentable in
-                    NavigationLink(destination: FullImageView(image: presentable.image,
+                    NavigationLink(destination: FullVideoView(videoUrl: presentable.videoUrl,
                                                               userName: presentable.userName,
                                                               tags: presentable.tags,
                                                               likes: presentable.likes,
                                                               comments: presentable.comments,
                                                               views: presentable.views,
                                                               downloads: presentable.downloads)) {
-                        CardImageView(image: presentable.image)
+                        CardVideoView(thumbnail: presentable.thumbnail)
                     }
+                    
                 }
                 
                 CustomProgressView()

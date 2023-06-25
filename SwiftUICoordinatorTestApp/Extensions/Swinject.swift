@@ -42,5 +42,10 @@ private extension Container {
             let networker = resolver.resolve(NetworkAgent.self)!
             return ImageService(networker: networker)
         }
+        
+        container.register(VideoService.self) { resolver in
+            let networker = resolver.resolve(NetworkAgent.self)!
+            return VideoService(networker: networker)
+        }
     }
 }
