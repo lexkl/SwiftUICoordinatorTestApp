@@ -6,16 +6,16 @@
 //
 
 import Foundation
-import RxSwift
 import SwiftUI
 import Swinject
+import Combine
 
 final class VideoListCoordinator: ObservableObject, Coordinator {
-    func videoListView(searchTextObservable: Observable<String>) -> AnyView {
+    func videoListView(searchTextPublisher: AnyPublisher<String, Never>) -> AnyView {
         let service = Container.shared.resolve(VideoService.self)!
         let provider = VideoListProvider(service: service)
         let viewModel = VideoListViewModelImpl(provider: provider,
-                                               searchTextObservable: searchTextObservable)
+                                               searchTextPublisher: searchTextPublisher)
         let view = VideoListView(viewModel: viewModel)
         
         return view.toAnyView()

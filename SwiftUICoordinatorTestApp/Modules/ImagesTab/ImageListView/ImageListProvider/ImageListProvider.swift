@@ -6,8 +6,8 @@
 //
 
 import Foundation
-import RxSwift
 import Swift
+import Combine
 
 struct ImageListProvider {
     private let service: ImageService
@@ -16,22 +16,26 @@ struct ImageListProvider {
         self.service = service
     }
     
-    func load(page: Int, searchText: String) -> Observable<[ImageListPresentable]> {
+    func load(page: Int, searchText: String) -> AnyPublisher<[ImageListPresentable], Error> {
         service.load(page: page, searchText: searchText)
-            .flatMap { apiImages -> Observable<[ImageListPresentable]> in
-                let observables = apiImages.map { apiImage in
-                    service.download(imageUrl: apiImage.webformatURL)
-                        .map { ImageListPresentable(id: apiImage.id,
-                                                    image: $0,
-                                                    userName: apiImage.user,
-                                                    tags: apiImage.tags,
-                                                    likes: apiImage.likes,
-                                                    comments: apiImage.comments,
-                                                    views: apiImage.views,
-                                                    downloads: apiImage.downloads) }
-                }
-                
-                return Observable.zip(observables)
+            .flatMap { apiImages -> AnyPublisher<[ImageListPresentable], Error> in
+                Publishers.Sequence(sequence: apiImages)
+                    .flatMap { apiImage -> AnyPublisher<ImageListPresentable, Error> in
+                        service.download(imageUrl: apiImage.webformatURL)
+                            .map { ImageListPresentable(id: apiImage.id,
+                                                        image: $0,
+                                                        userName: apiImage.user,
+                                                        tags: apiImage.tags,
+                                                        likes: apiImage.likes,
+                                                        comments: apiImage.comments,
+                                                        views: apiImage.views,
+                                                        downloads: apiImage.downloads)
+                            }
+                            .eraseToAnyPublisher()
+                    }
+                    .collect()
+                    .eraseToAnyPublisher()
             }
+            .eraseToAnyPublisher()
     }
 }

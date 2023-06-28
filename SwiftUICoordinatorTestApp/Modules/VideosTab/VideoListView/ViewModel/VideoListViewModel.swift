@@ -7,7 +7,7 @@
 
 import Foundation
 import SwiftUI
-import RxSwift
+import Combine
 
 struct VideoListPresentable {
     let id: Int
@@ -32,15 +32,16 @@ final class VideoListViewModelImpl: VideoListViewModel {
     @Published var presentables = [VideoListPresentable]()
     
     private let provider: VideoListProvider
-    private var searchTextObservable: Observable<String>
-    private let disposeBag = DisposeBag()
+    private var searchTextPublisher: AnyPublisher<String, Never>
+    
+    private var cancellables = Set<AnyCancellable>()
     
     private var currentPage = 1
     private var searchText = ""
     
-    init(provider: VideoListProvider, searchTextObservable: Observable<String>) {
+    init(provider: VideoListProvider, searchTextPublisher: AnyPublisher<String, Never>) {
         self.provider = provider
-        self.searchTextObservable = searchTextObservable
+        self.searchTextPublisher = searchTextPublisher
         
         bind()
     }
@@ -48,7 +49,9 @@ final class VideoListViewModelImpl: VideoListViewModel {
     func load(page: Int) {
         currentPage = page
         provider.load(page: currentPage, searchText: searchText)
-            .subscribe(onNext: { value in
+            .sink(receiveCompletion: { error in
+                print(error)
+            }, receiveValue: { value in
                 DispatchQueue.main.async { [weak self] in
                     guard let self else { return }
                     presentables.count == 0
@@ -56,7 +59,7 @@ final class VideoListViewModelImpl: VideoListViewModel {
                         : presentables.append(value)
                 }
             })
-            .disposed(by: disposeBag)
+            .store(in: &cancellables)
     }
     
     func loadNextPage() {
@@ -66,12 +69,12 @@ final class VideoListViewModelImpl: VideoListViewModel {
 
 private extension VideoListViewModelImpl {
     func bind() {
-        self.searchTextObservable
-            .subscribe { [weak self] text in
+        searchTextPublisher
+            .sink { [weak self] text in
                 guard let self else { return }
                 searchText = text
                 load(page: 1)
             }
-            .disposed(by: disposeBag)
+            .store(in: &cancellables)
     }
 }

@@ -6,11 +6,9 @@
 //
 
 import Foundation
-import RxAlamofire
 import Alamofire
-import RxSwift
-import RxCocoa
 import SwiftUI
+import Combine
 
 struct ApiImage: Decodable {
     let id: Int
@@ -47,30 +45,34 @@ struct ApiImageResponse: Decodable {
 final class ImageService {
     private let networker: NetworkAgent
     
-    private let concurrentQueue: DispatchQueue
-    private let scheduler: ConcurrentDispatchQueueScheduler
-    
     init(networker: NetworkAgent) {
         self.networker = networker
-        self.concurrentQueue = DispatchQueue(label: "concurrentQueue", qos: .background, attributes: .concurrent)
-        self.scheduler = ConcurrentDispatchQueueScheduler(queue: concurrentQueue)
     }
     
-    func load(page: Int, searchText: String) -> Observable<[ApiImage]> {
+    func load(page: Int, searchText: String) -> AnyPublisher<[ApiImage], Error> {
         let parameters = [
             "q": searchText,
             "page": page
         ] as [String : Any]
         
-        let apiImagesObservable: Observable<ApiImageResponse> = networker
-            .requestJSON(urlKey: .images, parameters: parameters)
-            .subscribe(on: scheduler)
-        return apiImagesObservable.map { $0.hits }
+        let apiImagesResponsePublisher: AnyPublisher<ApiImageResponse, Error> =
+            networker.requestJSON(urlKey: .images, parameters: parameters)
+        
+        return apiImagesResponsePublisher
+            .map { $0.hits }
+            .eraseToAnyPublisher()
     }
     
-    func download(imageUrl: String) -> Observable<UIImage> {
-        RxAlamofire.data(.get, imageUrl)
-            .subscribe(on: scheduler)
-            .compactMap { UIImage(data: $0) }
+    func download(imageUrl: String) -> AnyPublisher<UIImage, Error> {
+        guard let url = URL(string: imageUrl) else {
+            return Fail(error: ApiError.invalidUrl).eraseToAnyPublisher()
+        }
+        
+        return URLSession.shared.dataTaskPublisher(for: url)
+            .compactMap { data, _ in
+                UIImage(data: data)
+            }
+            .mapError { $0 }
+            .eraseToAnyPublisher()
     }
 }

@@ -6,11 +6,9 @@
 //
 
 import Foundation
-import RxAlamofire
 import Alamofire
-import RxSwift
-import RxCocoa
 import SwiftUI
+import Combine
 
 struct VideoData: Decodable {
     let url: String
@@ -52,25 +50,21 @@ struct ApiVideoResponse: Decodable {
 final class VideoService {
     private let networker: NetworkAgent
     
-    private let concurrentQueue: DispatchQueue
-    private let scheduler: ConcurrentDispatchQueueScheduler
-    
     init(networker: NetworkAgent) {
         self.networker = networker
-        self.concurrentQueue = DispatchQueue(label: "concurrentQueue", qos: .background, attributes: .concurrent)
-        self.scheduler = ConcurrentDispatchQueueScheduler(queue: concurrentQueue)
     }
     
-    func load(page: Int, searchText: String) -> Observable<[ApiVideo]> {
+    func load(page: Int, searchText: String) -> AnyPublisher<[ApiVideo], Error> {
         let parameters = [
             "q": searchText,
             "page": page
         ] as [String : Any]
         
-        let apiVideosObservable: Observable<ApiVideoResponse> = networker
-            .requestJSON(urlKey: .videos, parameters: parameters)
-            .subscribe(on: scheduler)
-            .observe(on: scheduler)
-        return apiVideosObservable.map { $0.hits }
+        let apiVideosResponsePublisher: AnyPublisher<ApiVideoResponse, Error> =
+            networker.requestJSON(urlKey: .videos, parameters: parameters)
+        
+        return apiVideosResponsePublisher
+            .map { $0.hits }
+            .eraseToAnyPublisher()
     }
 }

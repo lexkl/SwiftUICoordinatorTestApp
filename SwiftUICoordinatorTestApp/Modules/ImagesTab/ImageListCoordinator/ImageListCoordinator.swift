@@ -8,14 +8,14 @@
 import Foundation
 import Swinject
 import SwiftUI
-import RxSwift
+import Combine
 
 final class ImageListCoordinator: ObservableObject, Coordinator {
-    func imageListView(searchTextObservable: Observable<String>) -> AnyView {
+    func imageListView(searchTextPublisher: AnyPublisher<String, Never>) -> AnyView {
         let service = Container.shared.resolve(ImageService.self)!
         let provider = ImageListProvider(service: service)
         let viewModel = ImageListViewModelImpl(provider: provider,
-                                               searchTextObservable: searchTextObservable)
+                                               searchTextPublisher: searchTextPublisher)
         let view = ImageListView(viewModel: viewModel)
         
         return view.toAnyView()
