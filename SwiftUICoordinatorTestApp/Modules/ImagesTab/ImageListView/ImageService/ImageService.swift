@@ -6,7 +6,6 @@
 //
 
 import Foundation
-import Alamofire
 import SwiftUI
 import Combine
 
@@ -52,11 +51,11 @@ final class ImageService {
     func load(page: Int, searchText: String) -> AnyPublisher<[ApiImage], Error> {
         let parameters = [
             "q": searchText,
-            "page": page
-        ] as [String : Any]
+            "page": String(page)
+        ]
         
         let apiImagesResponsePublisher: AnyPublisher<ApiImageResponse, Error> =
-            networker.requestJSON(urlKey: .images, parameters: parameters)
+            networker.request(urlKey: .images, parameters: parameters)
         
         return apiImagesResponsePublisher
             .map { $0.hits }

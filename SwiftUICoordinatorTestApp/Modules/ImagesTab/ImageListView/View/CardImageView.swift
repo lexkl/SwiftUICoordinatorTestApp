@@ -13,18 +13,20 @@ struct CardImageView: View {
     @State private var startItemAnimation = false
     
     var body: some View {
-        Image(uiImage: image)
-            .resizable()
-            .scaledToFill()
-            .frame(maxWidth: .infinity)
-            .frame(height: 200.0)
-            .cornerRadius(10.0)
-            .opacity(startItemAnimation ? 1.0 : 0.0)
-            .offset(x: 0, y: startItemAnimation ? -10 : 0)
-            .animation(.easeInOut(duration: 1), value: startItemAnimation)
-            .onAppear {
-                startItemAnimation = true
-            }
+        ZStack {
+            Image(uiImage: image)
+                .resizable()
+                .scaledToFill()
+                .frame(width: UIScreen.main.bounds.size.width - 28)
+                .frame(height: 200.0)
+                .cornerRadius(10.0)
+                .opacity(startItemAnimation ? 1.0 : 0.0)
+                .offset(x: 0, y: startItemAnimation ? -10 : 0)
+                .animation(.easeInOut(duration: 1), value: startItemAnimation)
+        }
+        .onAppear {
+            startItemAnimation = true
+        }
     }
 }
 

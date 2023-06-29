@@ -49,7 +49,6 @@ struct ImageListView<ViewModel>: View where ViewModel: ImageListViewModel {
                         viewModel.loadNextPage()
                     }
             }
-            .padding(.horizontal, 14.0)
             .padding(.top, 10)
         }
         .refreshable {

@@ -6,63 +6,76 @@
 //
 
 import Foundation
-import Alamofire
 import Combine
 
 enum ApiError: Error {
     case invalidUrl
-    case parsingError
+    case invalidRequest
+    case emptyData
+}
+
+enum PixabayURL: String {
+    case images = "imagesUrl"
+    case videos = "videosUrl"
 }
 
 final class NetworkAgent {
-    enum PixabayURL: String {
-        case images = "imagesUrl"
-        case videos = "videosUrl"
-    }
-    
     private let plistLoader: PlistLoader
     
     init(plistLoader: PlistLoader) {
         self.plistLoader = plistLoader
     }
     
-    func requestJSON<T: Decodable>(urlKey: PixabayURL,
-                                   method: HTTPMethod = .get,
-                                   parameters: [String: Any] = [:]) -> AnyPublisher<T, Error> {
-        var urlsPlist: [String: String]
-        var privatePlist: [String: String]
-        
-        do {
-            urlsPlist = try plistLoader.load(name: "URL")
-            privatePlist = try plistLoader.load(name: "Private")
-        } catch {
-            return Fail(error: error).eraseToAnyPublisher()
-        }
-        
-        guard let url = urlsPlist[urlKey.rawValue],
-              let apiKey = privatePlist["apiKey"] else {
+    func request<T: Decodable>(urlKey: PixabayURL,
+                               parameters: [String: String] = [:]) -> AnyPublisher<T, Error> {
+        guard let url = try? getValueFromPlist(plistName: "URL", key: urlKey.rawValue),
+              let apiKey = try? getValueFromPlist(plistName: "Private", key: "apiKey") else {
             return Fail(error: PlistError.invalidPlistContent).eraseToAnyPublisher()
         }
         
-        let allParameters: [String: Any] = ["key": apiKey].merging(parameters) { _, new in
-            new
+        let allParameters = ["key": apiKey].merging(parameters) { _, new in new }
+        guard let request = urlRequest(url: url, parameters: allParameters) else {
+            return Fail(error: ApiError.invalidRequest).eraseToAnyPublisher()
         }
         
-        return AF.request(url, parameters: allParameters)
-            .publishDecodable(type: T.self)
-            .value()
-            .mapError { $0 }
+        return URLSession.DataTaskPublisher(request: request, session: URLSession.shared)
+            .print()
+            .tryMap { result -> T in
+                guard !result.data.isEmpty else {
+                    throw ApiError.emptyData
+                }
+                
+                return try JSONDecoder().decode(T.self, from: result.data)
+            }
             .eraseToAnyPublisher()
+    }
+}
+
+private extension NetworkAgent {
+    func urlRequest(url: String, parameters: [String: String]) -> URLRequest? {
+        guard var components = URLComponents(string: url) else {
+            return nil
+        }
         
-//        return RxAlamofire.requestJSON(method, url, parameters: allParameters)
-//            .map { (response, json) -> T in
-//                do {
-//                    let jsonData = try JSONSerialization.data(withJSONObject: json, options: [])
-//                    let decodedResponse = try JSONDecoder().decode(T.self, from: jsonData)
-//                    return decodedResponse
-//                } catch {
-//                    throw error
-//                }
-//            }
+        components.queryItems = parameters.map({ URLQueryItem(name: $0.key, value: $0.value) })
+        
+        guard let url = components.url else {
+            return nil
+        }
+                
+        var request = URLRequest(url: url)
+        request.timeoutInterval = 30.0
+        request.httpMethod = "get"
+        
+        return request
+    }
+    
+    func getValueFromPlist(plistName: String, key: String) throws -> String {
+        let plist = try plistLoader.load(name: plistName)
+        guard let value = plist[key] else {
+            throw PlistError.invalidPlistContent
+        }
+        
+        return value
     }
 }

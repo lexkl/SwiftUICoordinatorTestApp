@@ -6,7 +6,6 @@
 //
 
 import Foundation
-import Alamofire
 import SwiftUI
 import Combine
 
@@ -57,11 +56,11 @@ final class VideoService {
     func load(page: Int, searchText: String) -> AnyPublisher<[ApiVideo], Error> {
         let parameters = [
             "q": searchText,
-            "page": page
-        ] as [String : Any]
+            "page": String(page)
+        ]
         
         let apiVideosResponsePublisher: AnyPublisher<ApiVideoResponse, Error> =
-            networker.requestJSON(urlKey: .videos, parameters: parameters)
+            networker.request(urlKey: .videos, parameters: parameters)
         
         return apiVideosResponsePublisher
             .map { $0.hits }
