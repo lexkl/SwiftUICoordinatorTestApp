@@ -36,6 +36,7 @@
 		77A582B82A45F91D004064CA /* CustomProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77A582B72A45F91D004064CA /* CustomProgressView.swift */; };
 		77A582BA2A472750004064CA /* VideoCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77A582B92A472750004064CA /* VideoCardView.swift */; };
 		77A582BC2A472806004064CA /* FullVideoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77A582BB2A472806004064CA /* FullVideoView.swift */; };
+		77F8D2302A4E1C3B00B6BB74 /* NukeUI in Frameworks */ = {isa = PBXBuildFile; productRef = 77F8D22F2A4E1C3B00B6BB74 /* NukeUI */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -79,6 +80,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				39B2BA7C636CBD85238180B8 /* Pods_SwiftUICoordinatorTestApp.framework in Frameworks */,
+				77F8D2302A4E1C3B00B6BB74 /* NukeUI in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -357,6 +359,9 @@
 			dependencies = (
 			);
 			name = SwiftUICoordinatorTestApp;
+			packageProductDependencies = (
+				77F8D22F2A4E1C3B00B6BB74 /* NukeUI */,
+			);
 			productName = SwiftUICoordinatorTestApp;
 			productReference = 77550A172A3D0D5A00D65EC1 /* SwiftUICoordinatorTestApp.app */;
 			productType = "com.apple.product-type.application";
@@ -385,6 +390,9 @@
 				Base,
 			);
 			mainGroup = 77550A0E2A3D0D5A00D65EC1;
+			packageReferences = (
+				77F8D22E2A4E1C3B00B6BB74 /* XCRemoteSwiftPackageReference "Nuke" */,
+			);
 			productRefGroup = 77550A182A3D0D5A00D65EC1 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -681,6 +689,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		77F8D22E2A4E1C3B00B6BB74 /* XCRemoteSwiftPackageReference "Nuke" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/kean/Nuke.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 12.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		77F8D22F2A4E1C3B00B6BB74 /* NukeUI */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 77F8D22E2A4E1C3B00B6BB74 /* XCRemoteSwiftPackageReference "Nuke" */;
+			productName = NukeUI;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 77550A0F2A3D0D5A00D65EC1 /* Project object */;
 }

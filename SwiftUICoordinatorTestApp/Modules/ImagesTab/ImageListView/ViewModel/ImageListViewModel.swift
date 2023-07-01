@@ -16,13 +16,7 @@ enum ImageListViewState {
 
 struct ImageListPresentable {
     let id: Int
-    let image: UIImage
-    let userName: String
-    let tags: String
-    let likes: Int
-    let comments: Int
-    let views: Int
-    let downloads: Int
+    let imageUrl: URL
 }
 
 protocol ImageListViewModel: ObservableObject {
@@ -34,7 +28,7 @@ protocol ImageListViewModel: ObservableObject {
 }
 
 final class ImageListViewModelImpl: ImageListViewModel {
-    @Published var presentables = [ImageListPresentable]()
+    var presentables = [ImageListPresentable]()
     @Published var viewState = ImageListViewState.loading
     
     private let provider: ImageListProvider

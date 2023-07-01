@@ -11,21 +11,19 @@ struct ImageListView<ViewModel>: View where ViewModel: ImageListViewModel {
     @ObservedObject var viewModel: ViewModel
     
     var body: some View {
-        content
-            .toolbar(.visible, for: .tabBar)
-            .onAppear {
-                if viewModel.presentables.count == 0 {
-                    viewModel.load(page: 1)
-                }
+        ZStack {
+            switch viewModel.viewState {
+            case .loading:
+                CustomProgressView()
+            case .loaded:
+                imageList
             }
-    }
-    
-    private var content: AnyView {
-        switch viewModel.viewState {
-        case .loading:
-            return CustomProgressView().toAnyView()
-        case .loaded:
-            return imageList.toAnyView()
+        }
+        .toolbar(.visible, for: .tabBar)
+        .onAppear {
+            if viewModel.presentables.count == 0 {
+                viewModel.load(page: 1)
+            }
         }
     }
     
@@ -33,17 +31,11 @@ struct ImageListView<ViewModel>: View where ViewModel: ImageListViewModel {
         ScrollView(.vertical) {
             LazyVStack(spacing: 10.0) {
                 ForEach(viewModel.presentables, id: \.id) { presentable in
-                    NavigationLink(destination: FullImageView(image: presentable.image,
-                                                              userName: presentable.userName,
-                                                              tags: presentable.tags,
-                                                              likes: presentable.likes,
-                                                              comments: presentable.comments,
-                                                              views: presentable.views,
-                                                              downloads: presentable.downloads)) {
-                        CardImageView(image: presentable.image)
+                    NavigationLink(destination: EmptyView()) {
+                        CardImageView(imageUrl: presentable.imageUrl)
                     }
                 }
-                
+
                 CustomProgressView()
                     .onAppear {
                         viewModel.loadNextPage()

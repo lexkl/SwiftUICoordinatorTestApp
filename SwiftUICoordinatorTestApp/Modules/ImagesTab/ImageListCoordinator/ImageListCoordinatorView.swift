@@ -21,7 +21,7 @@ struct ImageListCoordinatorView: View {
     }
     
     var body: some View {
-        NavigationView {
+        NavigationStack {
             coordinator.imageListView(searchTextPublisher: textDidChangePublisher)
                 .navigationTitle("Images")
         }
